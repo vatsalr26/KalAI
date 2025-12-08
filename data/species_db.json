@@ -1,0 +1,32 @@
+[
+  {
+    "key": "pike",
+    "display_name": "Northern Pike",
+    "best_temp_low": 10.0,
+    "best_temp_high": 18.0,
+    "preferred_times_json": {"dawn": 50, "day": 10, "dusk": 30, "night": 10},
+    "clear_water_pref": "medium",
+    "bait_list_json": ["spinnerbait", "jerkbait", "bright lure"],
+    "notes": "Pike are active predators. Highly active in cooler, post-spawn temps and during low-light hours. Full moon nights can be surprisingly productive due to illumination."
+  },
+  {
+    "key": "perch",
+    "display_name": "European Perch",
+    "best_temp_low": 12.0,
+    "best_temp_high": 20.0,
+    "preferred_times_json": {"dawn": 40, "day": 30, "dusk": 20, "night": 10},
+    "clear_water_pref": "medium",
+    "bait_list_json": ["worms", "small jigs", "minnows"],
+    "notes": "Perch are generally day-time feeders, peaking early morning and evening."
+  },
+  {
+    "key": "trout",
+    "display_name": "Brown Trout",
+    "best_temp_low": 4.0,
+    "best_temp_high": 16.0,
+    "preferred_times_json": {"dawn": 40, "day": 10, "dusk": 30, "night": 20},
+    "clear_water_pref": "high",
+    "bait_list_json": ["flies", "spoons", "powerbait"],
+    "notes": "Trout prefer colder, highly-oxygenated water. They are most active during low-light conditions."
+  }
+]

@@ -1,0 +1,7 @@
+Flask
+python-dotenv
+requests
+streamlit
+geopy
+numpy
+pandas
