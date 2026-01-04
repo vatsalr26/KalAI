@@ -7,7 +7,31 @@
     "preferred_times_json": {"dawn": 50, "day": 10, "dusk": 30, "night": 10},
     "clear_water_pref": "medium",
     "bait_list_json": ["spinnerbait", "jerkbait", "bright lure"],
-    "notes": "Pike are active predators. Highly active in cooler, post-spawn temps and during low-light hours. Full moon nights can be surprisingly productive due to illumination."
+    "notes": "Pike are active predators. Highly active in cooler, post-spawn temps and during low-light hours. Full moon nights can be surprisingly productive due to illumination.",
+
+    "lures": [
+      {
+        "name": "Spinnerbait",
+        "type": "reaction",
+        "speed": "fast",
+        "visibility": "high",
+        "best_modes": ["aggressive", "active"]
+      },
+      {
+        "name": "Jerkbait",
+        "type": "reaction",
+        "speed": "fast",
+        "visibility": "medium",
+        "best_modes": ["aggressive"]
+      },
+      {
+        "name": "Bright Soft Plastic",
+        "type": "imitative",
+        "speed": "slow",
+        "visibility": "high",
+        "best_modes": ["neutral", "passive"]
+      }
+    ]
   },
   {
     "key": "perch",
@@ -17,7 +41,31 @@
     "preferred_times_json": {"dawn": 40, "day": 30, "dusk": 20, "night": 10},
     "clear_water_pref": "medium",
     "bait_list_json": ["worms", "small jigs", "minnows"],
-    "notes": "Perch are generally day-time feeders, peaking early morning and evening."
+    "notes": "Perch are generally day-time feeders, peaking early morning and evening.",
+
+    "lures": [
+      {
+        "name": "Worms",
+        "type": "natural",
+        "speed": "slow",
+        "visibility": "low",
+        "best_modes": ["passive", "neutral"]
+      },
+      {
+        "name": "Small Jig",
+        "type": "imitative",
+        "speed": "medium",
+        "visibility": "medium",
+        "best_modes": ["neutral"]
+      },
+      {
+        "name": "Minnow Imitation",
+        "type": "imitative",
+        "speed": "medium",
+        "visibility": "medium",
+        "best_modes": ["aggressive", "neutral"]
+      }
+    ]
   },
   {
     "key": "trout",
@@ -27,6 +75,30 @@
     "preferred_times_json": {"dawn": 40, "day": 10, "dusk": 30, "night": 20},
     "clear_water_pref": "high",
     "bait_list_json": ["flies", "spoons", "powerbait"],
-    "notes": "Trout prefer colder, highly-oxygenated water. They are most active during low-light conditions."
+    "notes": "Trout prefer colder, highly-oxygenated water. They are most active during low-light conditions.",
+
+    "lures": [
+      {
+        "name": "Fly",
+        "type": "surface",
+        "speed": "slow",
+        "visibility": "low",
+        "best_modes": ["passive", "neutral"]
+      },
+      {
+        "name": "Spoon",
+        "type": "reaction",
+        "speed": "fast",
+        "visibility": "high",
+        "best_modes": ["aggressive"]
+      },
+      {
+        "name": "Powerbait",
+        "type": "natural",
+        "speed": "slow",
+        "visibility": "medium",
+        "best_modes": ["passive"]
+      }
+    ]
   }
 ]

@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 
 from kalai.utils.environmental import get_moon_phase, read_water_sensor_mock
 from kalai.model.rule_based_model import rule_based_activity_score
+from kalai.model.lure_recommender import recommended_lures, feeding_mode
 
 load_dotenv()
 
@@ -112,8 +113,19 @@ def predict():
     best_time_windows = best_time_windows[:3]
 
     current_score, explanation = rule_based_activity_score(species_profile, weather_data, current_time)
+
+    mode = feeding_mode(current_score)
+
+    context = {
+        "feeding_mode": mode,
+        "water_temp": weather_data["water_temp_c"],
+        "cloud_cover": weather_data["cloud_cover_percent"],
+        "wind_speed": weather_data["wind_speed_ms"]
+    }
     
     activity_label = "high" if current_score > 75 else "medium" if current_score > 40 else "low"
+
+    recommended = recommended_lures(species_profile, context, top_n=3)
     
     response = {
       "location": {"lat": lat, "lon": lon},
@@ -121,7 +133,8 @@ def predict():
       "activity_score": current_score,
       "activity_label": activity_label,
       "best_time_windows": best_time_windows,
-      "bait_suggestions": species_profile["bait_list_json"],
+      "feeding_mode": mode,
+      "recommended_lures": recommended,
       "explanation": explanation,
       "model_used": "rule_based"
     }

@@ -4,6 +4,8 @@ import requests
 import json
 from datetime import datetime, timedelta, timezone
 import random
+import folium
+from streamlit_folium import st_folium
 
 # --- Configuration ---
 BACKEND_URL = "http://localhost:5000"
@@ -84,7 +86,32 @@ with tab1:
         'name': ['Current Location'] + [w['name'] for w in st.session_state.waterbodies],
     })
 
-    st.map(map_data, zoom=11)
+    st.header("Nearby waterbodies (Click to set location)")
+
+    m = folium.Map(
+        location=[st.session_state.lat, st.session_state.lon],
+        zoom_start=10
+    )
+
+    folium.Marker(
+        [st.session_state.lat, st.session_state.lon],
+        tooltip="Current Location",
+        icon=folium.Icon(color="red")
+    ).add_to(m)
+    
+    for w in st.session_state.waterbodies:
+        folium.Marker(
+            [w['lat'], w['lon']],
+            tooltip=w['name'],
+            icon=folium.Icon(color="blue", icon="tint")
+        ).add_to(m)
+
+    map_data = st_folium(m, width=700, height=500)
+
+    if map_data and map_data.get("last_clicked"):
+        st.session_state.lat = map_data["last_clicked"]["lat"]
+        st.session_state.lon = map_data["last_clicked"]["lng"]
+        st.success(f"Location updated to: ({st.session_state.lat:.4f}, {st.session_state.lon:.4f})")
     
     # 2. Prediction Results
     st.subheader("KalAI Prediction")
@@ -114,11 +141,16 @@ with tab1:
                 end_dt = datetime.fromisoformat(window['end']).strftime("%H:%M")
                 st.success(f"**{start_dt} - {end_dt}** (Score: {window['score']}%)")
 
-        # --- Bait Suggestions Card ---
+        # --- Lure Suggestions Card ---
         with col3:
-            st.markdown("##### Bait Suggestion")
-            bait_list = "\n* " + "\n* ".join(result['bait_suggestions'])
-            st.markdown(bait_list)
+            st.markdown("##### Recommended Lures")
+            
+            if "recommended_lures" in result and result['recommended_lures']:
+                for lure in result['recommended_lures']:
+                    st.progress(lure["confidence"] / 100)
+                    st.markdown(f"**{lure['name']}** - Confidence: {lure['confidence']}%")
+            else:
+                st.info("No lure recommendations available.")
 
         st.markdown("---")
         

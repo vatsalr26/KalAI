@@ -48,9 +48,12 @@ def read_water_sensor_mock() -> float:
     try:
 
         from w1thermsensor import W1ThermSensor, NoSensorFoundError
-        sensor = W1ThermSensor()
-        temp_c = sensor.get_temperature()
-        return round(temp_c, 1)
-    except (ImportError, NoSensorFoundError):
+        try:
+            sensor = W1ThermSensor()
+            temp_c = sensor.get_temperature()
+            return round(temp_c, 1)
+        except NoSensorFoundError:
+            return round(random.uniform(8.0, 18.0), 1)
+    except (ImportError):
         # Fallback to simulated data (8.0 to 18.0 C range for freshwater)
         return round(random.uniform(8.0, 18.0), 1)
